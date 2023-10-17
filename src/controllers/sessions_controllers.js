@@ -3,7 +3,7 @@ import { generateAuthToken } from "../utils/jwt.js";
 import UserDao from "../DAO/UserDao.js";
 import config from "../config/config.js";
 import { UserDTOcurrent } from "../DAO/DTOs/user.dto.js";
-import { dateAndTime } from "../utils/dateANDtime.js";
+import { dateAndTime } from "../utils/dateAndTime.js";
 
 const userDao = new UserDao();
 

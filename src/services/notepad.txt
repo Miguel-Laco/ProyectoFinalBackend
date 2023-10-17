@@ -1,0 +1,2 @@
+Esta capa de servicios, trabaja entre el DAO y el Controller.
+Si luego de consultar la capa de persistencia, hay que manipular la información, es esa capa quien debe hacerlo.

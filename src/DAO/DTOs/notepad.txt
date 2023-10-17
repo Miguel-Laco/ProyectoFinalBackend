@@ -1,0 +1,5 @@
+Esta capa se encarga de modificar los datos entre capa y capa. 
+En el ejemplo de la clase, la base de datos, requiere 3 campos.
+FullName, FirstName y Lastname, pero en el frontEnd solo tenemos FirstName y Lastname. 
+En este caso, DTO, se encargaría de fabricar el dato faltante en un objeto y enviarlo al DAO
+

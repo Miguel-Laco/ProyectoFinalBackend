@@ -1,0 +1,26 @@
+<h1>Productos Faker</h1>
+
+<div class="row">
+{{#each products}}
+  <div class="col-2 my-3">
+    <div class="card text-center">
+      <p class="card-text">{{this._id}}</p>
+      <h2 class="card-title">{{this.title}}</h2>
+      <div class="card-body">
+        <img src={{this.thumbnail}} class="card-img-top" alt="Imagen de producto">
+        <p>{{description}}</p>
+        <p>Precio: {{price}}</p>
+        <p>Stock: {{stock}}</p>
+        <p>Category: {{category}}</p>
+        <button class="btn btn-success" onclick="showAlert()">Agregar al carrito</button>
+      </div>
+    </div>
+  </div>
+{{/each}}
+</div>
+
+<script>
+  function showAlert() {
+    alert("Página de prueba");
+  }
+</script>

@@ -1,0 +1,25 @@
+{{!-- success.handlebars --}}
+<div class="container text-center my-3">
+    <div class="jumbotron" style="background-color: salmon;color: white;">
+        <h1>¡GRACIAS POR SU COMPRA!</h1>
+        <h3>Se ha generado un ticket a nombre de {{purchaser}} por un monto de ${{amount}}.</h3>
+        {{#if productsToKeep.length}}
+            <p>Los siguientes productos se mantendrán en su carrito hasta que vuelva el stock:</p>
+            <ol class="list-group list-group-numbered">
+                {{#each productsToKeep}}
+                <li class="list-group-item justify-content-center align-items-strech flex-direction-column flex-wrap-wrap">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{this.product.title}}</div>
+                        {{this.product.category}}
+                    </div>
+                    <span class="badge bg-primary rounded-pill">{{this.quantity}}</span>
+                </li>
+                {{/each}}
+            </ol>
+            <br>
+        {{else}}
+            <p>Hemos limpiado su carrito, para que pueda volver a llenarlo!!.</p>
+        {{/if}}
+        <button class="btn btn-warning my-5" onclick="location.href='/products'">VOLVER</button>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+{{!-- Acá va la vista del CHAT --}}
+
+<div class="menu">
+            <div class="back"> <img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
+            <div id="nombre" class="name"></div> 
+            {{!-- Acá voy a publicar el mail del usuario logueado --}}
+        </div>
+    <ol class="chat">
+    <li class="other">
+        <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false"/></div>
+      <div class="msg" id="other">
+        {{!-- aca van todos los chat de otros usuarios --}}
+      </div>
+    </li>
+    <li class="self">
+        <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false"/></div>
+      <div class="msg" id="self">
+        {{!-- <p>acá debería ir el chat propio</p> --}}
+      </div>
+    </li>
+    </ol>
+    {{!-- Creo un área para escribir en el chat --}}
+    <input id="chatBox" class="textarea" type="text" placeholder="Type here!"/><div class="emojis"></div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> {{!-- Conecto la CDN de SweetAlert2 --}}
+<script src="/socket.io/socket.io.js"></script> {{!-- Instanciamos un socket --}}
+{{!-- El script de socket siempre debe estar antes que el script propio --}}
+<script src="../public/js/chat.js"></script> {{!-- Refernciamos al index.js --}}

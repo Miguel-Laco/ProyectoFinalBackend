@@ -1,0 +1,26 @@
+{{! loggerTest.handlebars }}
+<h1>Información del Logger</h1>
+<h5>Ambiente actual definido en: {{logger.metadata.enviroment}}</h5>
+<ul>
+  {{#each logger.metadata.transports}}
+    <li>
+      Se registrará en <strong>{{this.name}}</strong> desde <br/>
+      Nivel: <strong>{{this.level}}</strong><br/>
+    </li>
+  {{/each}}
+</ul>
+<ul>
+  <li>Los colores definidos son:</li>
+  <ul>
+    <li><p class="text-danger bg-dark" >FATAL</p></li>
+    <li><p class="text-danger-emphasis bg-dark">ERROR</p></li>
+    <li><p class="text-warning bg-dark">WARNING</p></li>
+    <li><p class="text-secondary bg-dark">INFO</p></li>
+    <li><p class="text-success bg-dark">HTTP</p></li>
+    <li><p class="text-primary bg-dark">DEBUG</p></li>
+  </ul>
+    
+  
+</ul>
+
+<h6>Para seleccionar otro ambiente, edite la variable ENVIROMENT en .env </h6>

@@ -1,0 +1,120 @@
+{{!-- products.handlebars --}}
+<div class="container">
+  <h1>Productos</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card border-info mt-5" style="max-width: 20rem;">
+        <div class="card-header h4 text-center">Bienvenido {{userEmail}}!</div>
+        <div class="card-body">
+          <p class="card-text">Rol:</p><p class="rol">{{userRole}}</p>
+          <p class="card-text">Cart ID:</p><p class="cart">{{#if userCart}}{{userCart}}{{else}}N/A{{/if}}</p>
+        </div>
+        {{#if userCart}}
+        <a class="btn btn-info" href="/api/sessions/profile">Ver Perfil</a>
+        <a class="btn btn-warning my-1" href="/carts/{{userCart}}">Ver Carrito</a>
+        <a class="btn btn-secondary my-1" href="/chat">Ingresar al Chat</a>
+        {{/if}}
+        {{#if isAdmin}}
+        <a class="btn btn-secondary my-1" href="/api/users/manager">Gestionar Usuarios</a>
+        {{/if}}
+        <button class="btn btn-danger my-1" onclick="location.href='/api/sessions/logout'">LOGOUT</button>
+      </div>
+    </div>
+    <div class="col-md-6">
+      {{#if isPremiumOrAdmin}}
+        <form class="card container-sm mt-4 mb-4" method="POST" action="/api/products">
+        <label class="text-center h5">CREAR PRODUCTO:</label>
+          <div class="row mt-1">
+            <div class="col-sm">
+              <input type="text" id="title" name="title" class="form-control" placeholder="Title" aria-label="title" required>
+            </div>
+            <div class="col-sm">
+              <input type="text" id="description" name="description" class="form-control" placeholder="Description" aria-label="description" required>
+            </div>
+            <div class="col-sm">
+              <input type="text" id="code" name="code" class="form-control" placeholder="Code" aria-label="code" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <input type="number" id="price" name="price" class="form-control" placeholder="Price" aria-label="price" required>
+            </div>
+            <div class="col-sm">
+              <input type="number" id="stock" name="stock" class="form-control" placeholder="Stock" aria-label="stock" required>
+            </div>
+            <div class="col-sm">
+              <input type="text" id="category" name="category" class="form-control" placeholder="Category" aria-label="category" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class=" text-center">
+              <label class="">Thumbnail:</label>
+                <select class="form-select col" id="thumbnail" name="thumbnail" aria-label="Default select example" required>
+                  <option selected value="img/nuevo1.png">Color Image</option>
+                  <option value="img/nuevo2.png">White Image</option>
+                </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary mt-2 mb-1">Submit</button>
+        </form>
+      {{/if}}
+    </div>
+  </div>
+</div>
+
+  <div class="row">
+    {{#each payload}}
+      <div class="col-2 my-3">
+        <div class="card text-center">
+          <p class="card-text">{{_id}}</p>
+          <h2 class="card-title">{{title}}</h2>
+          <div class="card-body">
+            {{#if thumbnail}}
+          {{#each thumbnail}}
+            <img src="../public/{{this}}" class="card-img-top" alt="Imagen de producto">
+          {{/each}}
+        {{/if}}
+            <p>{{description}}</p>
+            <p>Precio: {{price}}</p>
+            <p>Stock: {{stock}}</p>
+            <p>Category: {{category}}</p>
+            {{#if userCart}}
+            <button class="btn btn-success" onclick="addToCart('{{_id}}',userCartValue)">Agregar al carrito</button>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    {{/each}}
+</div>
+
+
+{{!-- Mostrar los enlaces de paginación --}}
+<div class="pagination">
+  {{#if prevLink}}
+    <a href="{{prevLink}}">&laquo; Anterior</a>
+  {{/if}}
+
+  {{#each totalPages}}
+    {{#if (isCurrentPage this ../currentPage)}}
+      <span class="current-page">{{this}}</span>
+    {{else}}
+      <a href="/products?page={{this}}">{{this}}</a>
+    {{/if}}
+  {{/each}}
+
+  {{#if nextLink}}
+    <a href="{{nextLink}}">Siguiente &raquo;</a>
+  {{/if}}
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> {{!-- Conecto la CDN de SweetAlert2 --}}
+{{!-- Incluyo el script de Socket.IO --}}
+<script src="/socket.io/socket.io.js"></script>
+{{!-- Incluyo el script personalizado para manejar los eventos de WebSocket --}}
+<script src="../public/js/products.js"></script>
+{{!-- asigno userCart a una variable, porque no logro mostrarla directamente --}}
+<script>
+  const userCartValue = '{{this.userCart}}';
+</script>
+

@@ -1,0 +1,28 @@
+<div class="container">
+  
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+      <div class="card p-4">
+        <h2 class="text-center mb-4">Iniciar sesión</h2>
+        <form id="login-form" action="/api/sessions/login" method="post" role="form" autocomplete="on">
+          <div class="form-group">
+            <label for="loginUsername">Usuario</label>
+            <input type="text" class="form-control" id="loginUsername" name="email" placeholder="Ingrese su nombre de usuario" required autocomplete="username">
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Contraseña</label>
+            <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Ingrese su contraseña" required autocomplete="current-password">
+          </div>
+          <button type="submit" class="btn btn-secondary btn-block mt-4">Iniciar sesión</button> 
+          <button type="button" class="btn btn-secondary btn-block mt-4" onclick="location.href='/api/sessions/register'">Registro</button>
+          <button type="button" class="btn btn-dark btn-block mt-4" onclick="location.href='/api/sessions/github'"> Github Login <i class="fab fa-github"></i></button>
+          <button type="button" class="btn btn-danger btn-block mt-4" onclick="location.href='/api/services/mail'"> Reset Password <i class="fa fa-key"></i></button> 
+          {{#if message}}<div class="alert alert-danger text-center mt-2 mb-2" role="alert">{{message}}</div>{{/if}}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />

@@ -1,0 +1,31 @@
+{{!-- profile.handlebars --}}
+
+<div class="card border-info mx-auto mt-5" style="max-width: 18rem;">
+  <div class="card-header h4">PERFIL DE USUARIO</div>
+  
+  <div class="card-body">
+    {{#if user}}
+    <h5 class="card-title">Nombre: {{user.first_name}}</h5>
+    <p class="card-text">Apellido: {{user.last_name}}</p>
+    <p class="card-text">Correo electrónico: {{user.email}}</p>
+    <p class="card-text">Edad: {{user.age}}</p>
+    <p class="card-text">Rol: {{user.role}}</p>
+    <ul>
+      <h6>Uploads:</h6>
+      {{#each user.documents}}
+        <li>{{this.name}}</li>
+      {{/each}}
+    </ul>
+    
+  </div>
+  {{/if}}
+  
+{{#if user}}
+  <a class="btn btn-secondary mt-3" onclick="location.href='/api/services/mail'">Cambiar Contraseña</a>
+  <a class="btn btn-secondary mt-3" onclick="location.href='/api/users/premium/{{user.email}}'">Cambiar Rol</a>
+  <a class="btn btn-secondary mt-3" onclick="location.href='/api/users/upload/{{user._id}}'">Subir Documentos</a>
+{{/if}}
+</div>
+  <button class="btn btn-primary ms-3" onclick="location.href='/products'">VOLVER</button>
+  <button class="btn btn-danger" onclick="location.href='/api/sessions/logout'">LOGOUT</button>
+  {{#if message}}<div class="alert alert-danger mt-2 mb-2" role="alert">{{message}}</div>{{/if}}

@@ -1,0 +1,287 @@
+# products.yaml
+paths:
+  /api/products:
+    get:
+      summary: Obtiene una lista de productos.
+      tags:
+        - Products
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: Número máximo de productos a devolver (opcional).
+      responses:
+        "200":
+          description: Lista de productos obtenida exitosamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/product"
+        "404":
+          description: No se encontraron productos.
+        "500":
+          description: Error interno del servidor.
+    post:
+      summary: Crea un nuevo producto.
+      tags:
+        - Products
+      security:
+        - BearerAuth: []
+      requestBody:
+        description: Datos del producto que se va a crear.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/productInput"
+      responses:
+        "200":
+          description: Producto creado con éxito.
+          content:
+            application/json:
+              schema:
+                $ref: "#components/requestBodies/productInput"
+        "400":
+          description: Los datos del producto son inválidos.
+        "401":
+          description: No autorizado. Token no proporcionado.
+        "500":
+          description: Error interno del servidor.
+
+  /api/products/{pid}:
+    get:
+      summary: Obtiene un producto por su ID.
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+          description: ID del producto que se desea obtener.
+      responses:
+        "200":
+          description: Producto obtenido exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/product"
+        "400":
+          description: El ID del producto es inválido.
+        "404":
+          description: El producto no fue encontrado.
+        "500":
+          description: Error interno del servidor.
+    put:
+      summary: Actualiza un producto por su ID.
+      tags:
+        - Products
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID del producto que se desea actualizar.
+      requestBody:
+        description: Campos a actualizar en el producto.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/productUpdate"
+      responses:
+        "200":
+          description: Producto actualizado con éxito.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Estado de la operación (éxito).
+                  msg:
+                    type: string
+                    description:  Su product ID 64fa850d154423569fd25b57, fue modificado
+        "400":
+          description: Los datos del producto son inválidos.
+        "401":
+          description: No autorizado. Token no proporcionado.
+        "403":
+          description: No tienes permisos para actualizar este producto.
+        "404":
+          description: El producto no fue encontrado.
+        "500":
+          description: Error interno del servidor.
+    delete:
+      summary: Elimina un producto por su ID.
+      tags:
+        - Products
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+          description: ID del producto que se desea eliminar.
+      responses:
+        "200":
+          description: Producto eliminado con éxito.
+        "401":
+          description: No autorizado. Token no proporcionado.
+        "403":
+          description: No tienes permisos para eliminar este producto.
+        "404":
+          description: El producto no fue encontrado.
+        "500":
+          description: Error interno del servidor.
+
+components:
+  schemas:
+    product:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID autogenerado del producto
+        title:
+          type: string
+          description: Título del producto
+        description:
+          type: string
+          description: Descripción del producto
+        code:
+          type: string
+          description: Código del producto
+        price:
+          type: number
+          description: Precio del producto
+        status:
+          type: boolean
+          description: Estado del producto (activo/inactivo)
+        stock:
+          type: integer
+          description: Stock disponible del producto
+        category:
+          type: string
+          description: Categoría del producto
+        thumbnail:
+          type: array
+          items:
+            type: string
+          description: Imágenes en miniatura del producto
+        owner:
+          type: string
+          description: Propietario del producto
+      example:
+        _id: "6488bfeddf332d0300a6f7f5"
+        title: "Taladro"
+        description: "Herramienta para agujerear"
+        code: "TAL5"
+        price: 5000
+        status: true
+        stock: 50
+        category: "Herramientas"
+        thumbnail:
+          - "./img/taladro1.png"
+          - "./img/taladro2.png"
+        owner: "admin"
+
+  requestBodies:
+    productInput:
+      description: Datos del producto para crearlo
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Título del producto
+              description:
+                type: string
+                description: Descripción del producto
+              code:
+                type: string
+                description: Código del producto
+              price:
+                type: number
+                description: Precio del producto
+              status:
+                type: boolean
+                description: Estado del producto (activo/inactivo)
+              stock:
+                type: integer
+                description: Stock disponible del producto
+              category:
+                type: string
+                description: Categoría del producto
+              thumbnail:
+                type: array
+                items:
+                  type: string
+                description: Imágenes en miniatura del producto
+      example:
+        title: "Rotopercutora"
+        description: "Herramienta para romper homigon"
+        code: "ROT9"
+        price: 20000
+        status: true
+        stock: 90
+        category: "Herramientas"
+        thumbnail:
+          - "./img/taladro1.png"
+          - "./img/taladro2.png"
+    productUpdate:
+      description: Datos a actualizar del producto
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+                description: Título del producto
+              description:
+                type: string
+                description: Descripción del producto
+              code:
+                type: string
+                description: Código del producto
+              price:
+                type: number
+                description: Precio del producto
+              status:
+                type: boolean
+                description: Estado del producto (activo/inactivo)
+              stock:
+                type: integer
+                description: Stock disponible del producto
+              category:
+                type: string
+                description: Categoría del producto
+              thumbnail:
+                type: array
+                items:
+                  type: string
+                description: Imágenes en miniatura del producto
+      example:
+        title: "Title Updated"
+        description: "Description Updated"
+# Defino la seguridad Bearer según la documentación oficial
+  securitySchemes:
+    BearerAuth:  # Nombre arbitrario para el esquema de seguridad
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

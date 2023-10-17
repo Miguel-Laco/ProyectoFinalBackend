@@ -1,0 +1,34 @@
+{{!-- userManager.handlebars --}}
+<h1>Lista de Usuarios</h1>
+
+    {{#if user}}
+    <ul>
+        {{#each user}}
+        <li>
+            <a>{{first_name}}</a>
+            <a>{{last_name}}</a>
+            <strong>{{email}}</strong> 
+            <p>(Rol: <q class="role">{{role}}</q>)</p>
+            <p>CartID: {{cart}}</p>
+            {{#if last_connection}}
+        <p>Ultima conexión: {{last_connection}}</p>
+        {{else}}
+        <p>Ultima conexión: El usuario aún no ha iniciado sesión por primera vez.</p>
+        {{/if}}
+            <a class="btn btn-info mt-3" onclick="changeUserRole('{{email}}')">Cambiar Rol</a>
+            <a class="btn btn-danger mt-3" onclick="deleteUser('{{email}}')">Eliminar User & Cart</a>
+        </li>
+        <br>
+        <br>
+        {{/each}}
+    </ul>
+    {{else}}
+    <p>No hay usuarios disponibles.</p>
+    {{/if}}
+    <button class="btn btn-danger ms-2 my-2" onclick="location.href='/api/sessions/logout'">LOGOUT</button>
+    <button class="btn btn-secondary ms-2 my-2" onclick="location.href='/products'">volver</button>
+
+
+{{!-- Incluyo el script de Socket.IO --}}
+<script src="/socket.io/socket.io.js"></script>
+<script src="../../public/js/userManager.js"></script>

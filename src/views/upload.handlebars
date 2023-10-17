@@ -1,0 +1,34 @@
+<!-- upload.handlebars -->
+<div class="container">
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+      <div class="card p-4">
+        <h2 class="text-center mb-4">Upload Documents</h2>
+        <form action="/api/users/{{uid}}/documents" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="profiles">Profile:</label>
+            <input type="file" class="form-control-file" id="profiles" name="profiles" accept=".jpg,.jpeg,.png" data-category="profiles" >
+          </div>
+          <div class="form-group">
+            <label for="products">Products:</label>
+            <input type="file" class="form-control-file" id="products" name="products" accept=".jpg,.jpeg,.png" data-category="products" >
+          </div>
+          <div class="form-group">
+            <label for="documents">Documents:</label>
+            <div>
+
+            <input  type="file" class="form-control-file" id="documents" name="identification" accept=".pdf,.doc,.docx,.txt" data-category="documents" >
+            <input type="file" class="form-control-file" id="documents" name="proofOfAddress" accept=".pdf,.doc,.docx,.txt" data-category="documents" >
+            <input type="file" class="form-control-file" id="documents" name="bankStatement" accept=".pdf,.doc,.docx,.txt" data-category="documents" >
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+      </div>
+      <a class="btn btn-primary mt-3" href="/products">Volver</a>
+    </div>
+  </div>
+</div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />

@@ -1,0 +1,15 @@
+.card-img, .card-img-bottom, .card-img-top {
+    width: 20% !important
+    
+} 
+.rol{
+    font-weight: bold;
+    color: red;
+}
+.cart{
+    font-weight: bold;
+    color: rgb(0, 55, 255);
+}
+p {
+    margin-bottom: 0 !important
+}

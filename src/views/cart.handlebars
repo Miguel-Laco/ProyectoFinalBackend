@@ -1,0 +1,29 @@
+{{!-- cart.handlebars --}}
+<div class="container">
+    <div class="row">
+        <h1>Carrito de compras</h1>
+        <div class="col my-2">
+            <div class="card text-center" style="width: 13rem;">
+                <p class="card-text">Detalle del carrito: {{cart._id}}</p>
+                <p class="card-text">USER: {{user}}</p>
+                {{#each cart.cart}}
+                <div class="product">
+                    <h2 class="card-title">{{this.product.title}}</h2>
+                    <p class="card-text">Cantidad: {{this.quantity}}</p>
+                    <div class="card-body">
+                        <button class="btn btn-danger" onclick="deleteProduct('{{../cart._id}}', '{{this.product._id}}')">Quitar del carrito</button>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-success" onclick="purchase('{{cart._id}}')">Comprar</button>
+    <br>
+    <button class="btn btn-secondary mt-3" onclick="location.href='/products'">Volver</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> {{!-- Conecto la CDN de SweetAlert2 --}}
+<script src="/socket.io/socket.io.js"></script>
+<script src="../public/js/carts.js"></script>
+

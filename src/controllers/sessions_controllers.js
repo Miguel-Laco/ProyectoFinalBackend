@@ -2,7 +2,6 @@
 import { generateAuthToken } from "../utils/jwt.js";
 import UserDao from "../DAO/UserDao.js";
 import config from "../config/config.js";
-import { UserDTOcurrent } from "../DAO/DTOs/user.dto.js";
 import { dateAndTime } from "../utils/dateAndTime.js";
 
 const userDao = new UserDao();
@@ -104,11 +103,6 @@ const crtl_GET_Logout = async (req, res) => {
     res.redirect("/")
 };
 
-const crtl_GET_Current = async (req, res) => {
-    let user = new UserDTOcurrent(await userDao.getByEmail(req.user.email))
-    req.logger.info(user);
-    res.render('current', { user: user, message: "Ingresamos mediante Passport-jwt" });
-};
 
-export {ctrl_GET_Register, crtl_POST_Register, crtl_GET_Register_error, crtl_GET_Login, crtl_POST_Login, crtl_GET_Login_error, crtl_GET_Githubcallback, crtl_GET_Profile, crtl_GET_Logout, crtl_GET_Current}
+export {ctrl_GET_Register, crtl_POST_Register, crtl_GET_Register_error, crtl_GET_Login, crtl_POST_Login, crtl_GET_Login_error, crtl_GET_Githubcallback, crtl_GET_Profile, crtl_GET_Logout}
 

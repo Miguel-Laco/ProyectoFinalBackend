@@ -11,8 +11,7 @@ import {
     crtl_GET_Login_error, 
     crtl_GET_Githubcallback, 
     crtl_GET_Profile, 
-    crtl_GET_Logout, 
-    crtl_GET_Current
+    crtl_GET_Logout
 } from "../controllers/sessions_controllers.js"
 import { authToken } from "../utils/jwt.js";
 
@@ -32,7 +31,6 @@ sessionRouter.post('/login', passport.authenticate("login", {failureRedirect: "/
 
 sessionRouter.get('/login-error', crtl_GET_Login_error);
 
-//Genero una ruta para la autenticación con github
 sessionRouter.get("/github",passport.authenticate("github", {scope:["user:email"]}), async(req,res)=>{})
 
 sessionRouter.get("/githubcallback",passport.authenticate("github", {failureRedirect:"/api/sessions/login-error"}), crtl_GET_Githubcallback)
@@ -41,7 +39,5 @@ sessionRouter.get('/profile', authToken, crtl_GET_Profile);
 
 sessionRouter.get('/logout', crtl_GET_Logout);
 
-// Ruta para passport-jwt (Desafío clase 24)
-sessionRouter.get('/current', passport.authenticate('current', { session: false}), crtl_GET_Current);
 
 export default sessionRouter;

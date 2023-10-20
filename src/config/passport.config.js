@@ -3,18 +3,15 @@ import passport from "passport";
 import local from "passport-local";
 import GithubStrategy from "passport-github2";
 import UserDao from "../DAO/UserDao.js";
-import { isValidPassword, createHash, cookieExtrator } from "../utils/utils.js";
-import jwt from "passport-jwt";
+import { isValidPassword, createHash } from "../utils/utils.js";
 import config from "./config.js";
 import CartDao from "../DAO/CartDao.js"
-import { logger } from "../utils/logger.js";
 import { UserDTOgithub } from "../DAO/DTOs/user.dto.js";
 
 const cartManager = new CartDao();
 const LocalStrategy = local.Strategy;
 const userDao = new UserDao();
-const JWTStrategy = jwt.Strategy;
-const ExtractJWT = jwt.ExtractJwt;
+
 
 const initializePassport = () => {
 
@@ -90,32 +87,17 @@ passport.use("register", new LocalStrategy(
     }
     ))
 
-    passport.use("current", new JWTStrategy({
-        jwtFromRequest: ExtractJWT.fromExtractors([cookieExtrator]),
-        secretOrKey: config.JWT_PRIVATE_KEY,
-    }, async (jwt_payload, done) => {
-        try {
-            logger.info("Token verificado correctamente", jwt_payload);
-            return done(null, jwt_payload);
-        } catch (error) {
-            logger.error("Error al verificar el token:", error);
-            return done(error);
-        }
-    }))
-    
-
 passport.serializeUser((user, done) => {
       done(null, user.email); // Utilizar el correo electrónico como identificador único
-  });
-  
-  passport.deserializeUser(async (id, done) => {
+});
+passport.deserializeUser(async (id, done) => {
     try {
-      let user = await userDao.getById(id);
-      done(null, user); // Agrega esta línea para pasar el usuario encontrado
+        let user = await userDao.getById(id);
+        done(null, user); // Agrega esta línea para pasar el usuario encontrado
     } catch (error) {
-      done(error); // Agrega esta línea para pasar cualquier error
+        done(error); // Agrega esta línea para pasar cualquier error
     }
-  });
+});
 
 }
 

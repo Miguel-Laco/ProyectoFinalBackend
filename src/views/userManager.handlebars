@@ -25,10 +25,12 @@
     {{else}}
     <p>No hay usuarios disponibles.</p>
     {{/if}}
-    <button class="btn btn-danger ms-2 my-2" onclick="location.href='/api/sessions/logout'">LOGOUT</button>
     <button class="btn btn-secondary ms-2 my-2" onclick="location.href='/products'">volver</button>
+    <button class="btn btn-danger ms-2 my-2" onclick="location.href='/api/sessions/logout'">LOGOUT</button>
+    <button class="btn btn-success" onclick="deleteInactiveUsers()">Eliminar usuarios inactivos</button>
 
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> {{!-- Conecto la CDN de SweetAlert2 --}}
 {{!-- Incluyo el script de Socket.IO --}}
 <script src="/socket.io/socket.io.js"></script>
 <script src="../../public/js/userManager.js"></script>

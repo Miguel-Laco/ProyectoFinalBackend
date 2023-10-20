@@ -125,8 +125,13 @@ socketServer.on(`connection`, async (socket) => {
     //Comienzo a escuchar productToAdd, para agregar un producto al carrito
     socket.on("productToAdd", async ({cid, pid}) =>{
             try {
-            const addPorduct = await cartDao.addProductToCart(cid,pid)
-            socket.emit("productAdd-confirm", addPorduct)
+                if (cid === "") {
+                    socket.emit("productAdd-admin")
+                    console.log("entro aca");
+                }else{
+                    const addPorduct = await cartDao.addProductToCart(cid,pid)
+                    socket.emit("productAdd-confirm", addPorduct)
+                }
             } catch (error) {
                 logger.error(error);
                 socket.emit("productAdd-error", { message: error.message });
@@ -194,5 +199,19 @@ socketServer.on(`connection`, async (socket) => {
         }
     })
 
-})
+    socket.on("reload", async () =>{
+        let products = await manager.getProducts();
+        socket.emit("listaProductos",  {
+            products
+        })
+    })
 
+    socket.on("reloadpage", async () =>{
+        try {
+            socket.emit("reloadManager")
+        } catch (error) {
+            logger.error(error);
+        }
+    })
+
+})

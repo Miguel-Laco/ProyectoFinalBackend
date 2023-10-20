@@ -16,6 +16,7 @@
         {{/if}}
         {{#if isAdmin}}
         <a class="btn btn-secondary my-1" href="/api/users/manager">Gestionar Usuarios</a>
+        <a class="btn btn-secondary my-1" href="/realtimeproducts">Realtimeproducts</a>
         {{/if}}
         <button class="btn btn-danger my-1" onclick="location.href='/api/sessions/logout'">LOGOUT</button>
       </div>
@@ -50,8 +51,8 @@
             <div class=" text-center">
               <label class="">Thumbnail:</label>
                 <select class="form-select col" id="thumbnail" name="thumbnail" aria-label="Default select example" required>
-                  <option selected value="img/nuevo1.png">Color Image</option>
-                  <option value="img/nuevo2.png">White Image</option>
+                  <option selected value="/public/img/nuevo1.png">Color Image</option>
+                  <option value="/public/img/nuevo2.png">White Image</option>
                 </select>
             </div>
           </div>
@@ -62,6 +63,7 @@
   </div>
 </div>
 
+
   <div class="row">
     {{#each payload}}
       <div class="col-2 my-3">
@@ -71,16 +73,14 @@
           <div class="card-body">
             {{#if thumbnail}}
           {{#each thumbnail}}
-            <img src="../public/{{this}}" class="card-img-top" alt="Imagen de producto">
+            <img src="{{this}}" class="card-img-top" alt="Imagen de producto">
           {{/each}}
         {{/if}}
             <p>{{description}}</p>
             <p>Precio: {{price}}</p>
             <p>Stock: {{stock}}</p>
             <p>Category: {{category}}</p>
-            {{#if userCart}}
             <button class="btn btn-success" onclick="addToCart('{{_id}}',userCartValue)">Agregar al carrito</button>
-            {{/if}}
           </div>
         </div>
       </div>
@@ -101,7 +101,6 @@
       <a href="/products?page={{this}}">{{this}}</a>
     {{/if}}
   {{/each}}
-
   {{#if nextLink}}
     <a href="{{nextLink}}">Siguiente &raquo;</a>
   {{/if}}

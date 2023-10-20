@@ -4,7 +4,6 @@ const socket = io(); // Conectarse al servidor a través de sockets
 
 
 const addToCart = async (pid, cid) =>{
-  console.log(cid);
     // Envío por socket el id del producto y del cart elegido por el usuario
 socket.emit("productToAdd", { pid, cid })
 }
@@ -19,10 +18,19 @@ socket.on("productAdd-confirm", addPorduct => {
 });
 
 //Escucho si devuelve un error
-socket.on("productAdd-error", error => {
+socket.on("productAdd-error", (error) => {
   Swal.fire({
     title: "Error al agregar producto",
     text: error.message,
+    icon: "error",
+  });
+});
+
+//Escucho si el admin intenta agregar un producto al carrito
+socket.on("productAdd-admin", () => {
+  Swal.fire({
+    title: "Error al agregar producto",
+    text: "El Admin no puede agregar productos",
     icon: "error",
   });
 });

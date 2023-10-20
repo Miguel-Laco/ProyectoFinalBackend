@@ -41,10 +41,30 @@ const renderProduct = (productData) => {
 //Comienzo a escuchar al servidor, para recibir listaProductos y mando la información a la función que renderiza
 socket.on("listaProductos", renderProduct)
 
-//Creo una función que será llamada por cada boton borrar y recibe su id
-//Este ID lo mando al server para luego borrar la tarjeta
-function productDelete(id) {
-    socket.emit("productDelete", id)
+
+async function productDelete(id) {
+    try {
+        const response = await fetch(`http://localhost:8080/api/products/${id}`, {
+        method: 'DELETE',
+        });
+        if (response.ok) {
+            await Swal.fire({
+                title: "Se eliminó el producto",
+                text: "Si el owner del producto era premium, fue notificado ",
+                icon: "success",
+            });
+            socket.emit("reload")
+        } else {
+            await Swal.fire({
+                title: "Error",
+                text: "Error al eliminar el producto",
+                icon: "error",
+        });
+        socket.emit("reload")
+    }
+    } catch (error) {
+        console.error('Error en la solicitud DELETE:', error);
+    }
 }
 
 

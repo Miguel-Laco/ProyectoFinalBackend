@@ -4,6 +4,7 @@ import { UserDTO } from "../DAO/DTOs/user.dto.js";
 import UserDao from "../DAO/UserDao.js";
 import config from "../config/config.js";
 import { sendMail } from "../services/email/email.js";
+import { dateTwoDaysAgo} from "../utils/dateAndTime.js";
 import { generateAuthToken } from "../utils/jwt.js";
 
 const userDao = new UserDao;
@@ -98,16 +99,16 @@ const ctrl_getUsers = async (req, res) => {
 const ctrl_deleteInactiveUsers = async (req, res) => {
     try {
         // Guardo la fecha actual menos 2 días en milisegundos.
-        const twoDaysAgo = Date.now() - 2 * 24 * 60 * 60 * 1000;
+        const twoDaysAgo = await dateTwoDaysAgo();
         // Busco todos los usuarios.
         const allUsers = await userDao.getAll();
         // Filtro los usuarios inactivos.
         const inactiveUsers = allUsers.filter((user) => {
         // Convierto la fecha de last_connection al formato de fecha
-        const lastConnectionDate = new Date(user.last_connection);
+        const lastConnectionDate = user.last_connection;
         // Devuelvo solo los usuarios que tengan una fecha mayor a dos días
         return lastConnectionDate  < twoDaysAgo;
-        });
+    });
         // Elimino los usuarios inactivos.
         inactiveUsers.forEach(async (user) => {
             // Envío un correo al usuario antes de eliminar su cuenta.
@@ -129,7 +130,7 @@ const ctrl_deleteInactiveUsers = async (req, res) => {
             await userDao.deleteUser(user.email);
             req.logger.info('Usuarios inactivos eliminados y notificados.');
         });
-        res.json({ message: 'Usuarios inactivos eliminados y notificados' });
+        res.status(200).json({ message: 'Usuarios inactivos eliminados y notificados' });
     } catch (error) {
         console.error('Error al eliminar usuarios inactivos:', error);
     }

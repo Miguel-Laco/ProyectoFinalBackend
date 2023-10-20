@@ -8,10 +8,18 @@ const transport = nodemailer.createTransport({
     auth: {
         user: config.GMAIL_USER,
         pass: config.GMAIL_PASS
+    },
+    tls: {
+        rejectUnauthorized: false 
     }
 });
 
 export const sendMail = async options => {
-    let result = await transport.sendMail(options);
-    return result;
+    try {
+        let result = await transport.sendMail(options);
+        return result;
+    } catch (error) {
+        console.error('Error al enviar el correo:', error);
+        return null;
+    }
 }

@@ -11,7 +11,7 @@ import {
     ctrl_MockingProducts,
     ctrl_LoggerTest
 } from "../controllers/views_controllers.js"
-import { setOwner } from "../utils/jwt.js";
+import { requireAdmin, setOwner } from "../utils/jwt.js";
 
 const views = Router();
 
@@ -22,7 +22,7 @@ views.get(`/`, ctrl_Home)
 
 
 //Genereo una vista para trabajar con websockets en /realtimproducts
-views.get(`/realtimeproducts`, ctrl_RealtimeProducts)
+views.get(`/realtimeproducts`, requireAdmin, ctrl_RealtimeProducts)
 
 
 //Genereo una vista para trabajar con websockets en /realtimproducts

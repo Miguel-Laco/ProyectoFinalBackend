@@ -4,7 +4,8 @@
 
 
 {{!-- Creo un formulario para agregar productos --}}
-
+  <button class="btn btn-primary ms-3 mt-4" onclick="location.href='/products'">VOLVER</button>
+  <button class="btn btn-danger mt-4" onclick="location.href='/api/sessions/logout'">LOGOUT</button>
 <form class="card container-sm mt-4 mb-4">
   <div class="row mt-1">
   <div class="col-sm">
@@ -50,7 +51,7 @@
 
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> {{!-- Conecto la CDN de SweetAlert2 --}}
 <script src="/socket.io/socket.io.js"></script> {{!-- Instanciamos un socket --}}
 {{!-- El script de socket siempre debe estar antes que el script propio --}}
 <script src="../public/js/realTimeProducts.js"></script> {{!-- Refernciamos al index.js --}}

@@ -2,7 +2,7 @@
 import { usersModel } from "./model/users.model.js";
 import CartDao from "./CartDao.js";
 import { logger } from "../utils/logger.js";
-import { createHash, isValidPassword } from "../utils/utils.js";
+import { createHash } from "../utils/utils.js";
 
 const cartManager = new CartDao();
 

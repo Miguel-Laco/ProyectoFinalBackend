@@ -1,3 +1,5 @@
+import config from "../../config/config";
+
 /* realTimeProducts.js */
 const socket =io();
 // io hace referencia a "socket.io, se llama así por convención"
@@ -44,7 +46,7 @@ socket.on("listaProductos", renderProduct)
 
 async function productDelete(id) {
     try {
-        const response = await fetch(`http://localhost:8080/api/products/${id}`, {
+        const response = await fetch(`${config.DOMAIN}/api/products/${id}`, {
         method: 'DELETE',
         });
         if (response.ok) {

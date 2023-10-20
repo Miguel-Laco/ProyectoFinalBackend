@@ -151,7 +151,7 @@ socketServer.on(`connection`, async (socket) => {
 
     socket.on("purchaseCart", async (cid) => {
             try {
-            const response = await fetch(`http://localhost:8080/api/carts/${cid}/purchase`, {
+            const response = await fetch(`${config.DOMAIN}/api/carts/${cid}/purchase`, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'

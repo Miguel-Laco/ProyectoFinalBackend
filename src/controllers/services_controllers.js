@@ -3,6 +3,7 @@ import {sendMail} from "../services/email/email.js"
 import UserDao from "../DAO/UserDao.js";
 import { isValidPassword } from "../utils/utils.js";
 import {generateMailToken} from "../utils/jwt.js"
+import config from "../config/config.js";
 
 const userDao = new UserDao();
 
@@ -56,7 +57,7 @@ const ctrl_POST_resetPassword = async (req, res) => {
 const ctrl_GET_Mail = async (req, res) => {
     let email = req.body.email;
     const resetToken = generateMailToken({ email: email })
-    const resetLink = `http://localhost:8080/api/services/changePassword?resetToken=${resetToken}`;
+    const resetLink = `${config.DOMAIN}/api/services/changePassword?resetToken=${resetToken}`;
     const mailOptions = {
         from: `test email <magulaco@gmail.com>`,
         to: email,

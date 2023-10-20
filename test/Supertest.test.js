@@ -7,10 +7,11 @@ import UserDao from '../src/DAO/UserDao.js'
 import CartDao from '../src/DAO/CartDao.js'
 import mongoose from "mongoose"; //Importo Mongoose, porque al final voy a usar el DAO para borrar el usuario, el cart y producto creado.
 import Assert from "assert";
+import config from '../src/config/config.js'
 
 
 const expect = chai.expect
-const requester = supertest("http://localhost:8080")
+const requester = supertest(`${config.DOMAIN}`)
 const assert = Assert.strict;
 let superCookie = "";   //Genero una variable para almacenar la cookie luego
 let newProductID = "";  //Genero una variable para almacenar el ID del nuevo producto, para poder borrarlo al final

@@ -7,6 +7,7 @@ dotenv.config(/* { path: '../.env'} */);
 
 export default {
     PORT: process.env.PORT,
+    DOMAIN: process.env.DOMAIN,
     MONGO_URL: process.env.MONGO_URL,
     GITHUB_API_KEY: process.env.GITHUB_API_KEY,
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,

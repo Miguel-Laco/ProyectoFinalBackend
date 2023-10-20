@@ -62,8 +62,8 @@ export default class PaymentService {
                     })),
                     payment_intent_data: {
                     },
-                    success_url: `http://localhost:8080/api/carts/purchase/success`,
-                    cancel_url: 'http://localhost:8080/api/carts/purchase/cancel'
+                    success_url: `${config.DOMAIN}/api/carts/purchase/success`,
+                    cancel_url: `${config.DOMAIN}/api/carts/purchase/cancel`
                     
                 });
                 return { sessionId: session};

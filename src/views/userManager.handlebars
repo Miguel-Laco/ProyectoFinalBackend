@@ -27,7 +27,8 @@
     {{/if}}
     <button class="btn btn-secondary ms-2 my-2" onclick="location.href='/products'">volver</button>
     <button class="btn btn-danger ms-2 my-2" onclick="location.href='/api/sessions/logout'">LOGOUT</button>
-    <button class="btn btn-success" onclick="deleteInactiveUsers()">Eliminar usuarios inactivos</button>
+    <button class="btn btn-success" onclick="deleteInactiveUsers('{{domain}}')">Eliminar usuarios inactivos</button>
+    
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> {{!-- Conecto la CDN de SweetAlert2 --}}

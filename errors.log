@@ -114,3 +114,48 @@ error: undefined
 error: undefined
 error: connect ETIMEDOUT 35.199.93.83:27017 {"reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":30,"maxElectionId":null,"maxSetVersion":null,"servers":{},"setName":"atlas-zdb6zm-shard-0","stale":false,"type":"ReplicaSetNoPrimary"}}
 error: connect ETIMEDOUT 35.199.93.83:27017 {"reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":30,"maxElectionId":null,"maxSetVersion":null,"servers":{},"setName":"atlas-zdb6zm-shard-0","stale":false,"type":"ReplicaSetNoPrimary"}}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"magulaco@gmail.com\"","value":"magulaco@gmail.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"magulaco@gmail.com\"","value":"magulaco@gmail.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"magulaco@gmail.com\"","value":"magulaco@gmail.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"magulaco@gmail.com\"","value":"magulaco@gmail.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"magulaco@gmail.com\"","value":"magulaco@gmail.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"magulaco@gmail.com\"","value":"magulaco@gmail.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"magulaco@gmail.com\"","value":"magulaco@gmail.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"magulaco@gmail.com\"","value":"magulaco@gmail.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"magulaco@gmail.com\"","value":"magulaco@gmail.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"magulaco@gmail.com\"","value":"magulaco@gmail.com","valueType":"string"}
+error: undefined {"_message":"products validation failed","errors":{"_id":{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"1\" (type number) at path \"_id\" because of \"BSONError\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"1\"","value":1,"valueType":"number"}}}
+error: undefined {"_message":"products validation failed","errors":{"_id":{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"2\" (type number) at path \"_id\" because of \"BSONError\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"2\"","value":2,"valueType":"number"}}}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"adminCoder@coder.com\"","value":"adminCoder@coder.com","valueType":"string"}
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined {"_message":"products validation failed","errors":{"_id":{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"10\" (type number) at path \"_id\" because of \"BSONError\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"10\"","value":10,"valueType":"number"}}}
+error: undefined {"code":"ETIMEOUT","hostname":"_mongodb._tcp.ecommerce.cmlx1ff.mongodb.net","syscall":"querySrv"}
+error: undefined
+error: undefined
+error: undefined {"code":"ETIMEOUT","hostname":"_mongodb._tcp.ecommerce.cmlx1ff.mongodb.net","syscall":"querySrv"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"adminCoder@coder.com\"","value":"adminCoder@coder.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"adminCoder@coder.com\"","value":"adminCoder@coder.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"adminCoder@coder.com\"","value":"adminCoder@coder.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"adminCoder@coder.com\"","value":"adminCoder@coder.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"adminCoder@coder.com\"","value":"adminCoder@coder.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"adminCoder@coder.com\"","value":"adminCoder@coder.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"adminCoder@coder.com\"","value":"adminCoder@coder.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"magulaco@gmail.com\"","value":"magulaco@gmail.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"adminCoder@coder.com\"","value":"adminCoder@coder.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"adminCoder@coder.com\"","value":"adminCoder@coder.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"adminCoder@coder.com\"","value":"adminCoder@coder.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"magulaco@gmail.com\"","value":"magulaco@gmail.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"adminCoder@coder.com\"","value":"adminCoder@coder.com","valueType":"string"}
+error: undefined {"kind":"ObjectId","path":"_id","reason":{},"stringValue":"\"adminCoder@coder.com\"","value":"adminCoder@coder.com","valueType":"string"}

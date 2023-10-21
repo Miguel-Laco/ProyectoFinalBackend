@@ -126,17 +126,25 @@ const crtl_POST_purchase = async (req, res) => {
     try {
         const cartId = req.params.cid;
         const response = await paymentService.createPaymentSession(cartId);
-        if (response) {
+        if (response.status === "error") {
+            let data = response.msg;
+            return res.status(200).json({ status: "error", message: data });
+        } else if (response.status === "success") {
             const url = response.sessionId.url;
-            res.status(200).json({ url });
-        } else{
-            let data = "No hay stock de productos"
-            res.status(500).json({ data })
+            return res.status(200).json({ status: "success", url: url });
+        } else if (response.status === "out_of_stock") {
+            let data = response.msg;
+            return res.status(200).json({ status: "out_of_stock", message: data });
+        }else {
+            const url = response.sessionId.url;
+            return res.status(200).json({ status: "success", url: url });
         }
     } catch (error) {
-        res.status(500).json({ error: 'Error al procesar la compra' });
+        return res.status(500).json({ status: "error", message: 'Error al procesar la compra' });
     }
 }
+
+
 
 const ctrl_GET_success = async (req, res) => {
     try {

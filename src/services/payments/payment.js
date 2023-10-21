@@ -43,8 +43,11 @@ export default class PaymentService {
                 productsToPurchase.push(cartItem);
             }
             if (productsToPurchase.length === 0) {
-                logger.info('No hay productos para comprar');
-                return
+                if (productsToKeep.length !== 0) {
+                    return { status: "out_of_stock", msg: "La cantidad de el/los productos supera nuestro stock" };
+                } else {
+                    return { status: "error", msg: "No hay productos en su carrito" };
+                }
             }else{
                 // Creo una sesión de pago con Stripe Checkout
                 const session = await this.stripe.checkout.sessions.create({
@@ -69,12 +72,8 @@ export default class PaymentService {
                 return { sessionId: session};
             }
         } catch (error) {
-            if (error.message === 'No hay productos disponibles para comprar.') {
-                return { error: 'No hay productos disponibles para comprar.' };
-            } else {
-                logger.error(error);
+            logger.error(error);
                 throw error;
-            }
         }
     }
 
@@ -117,7 +116,7 @@ export default class PaymentService {
                 amount: amount,
                 productsToKeep: JSON.stringify(productsToKeep),
                 cartId: cartId
-            }            
+            }
             // Genero el ticket 
             await ticketManager.creatTicket(amount, purchaser)
             // Actualizar el carrito con los productos que no se compraron

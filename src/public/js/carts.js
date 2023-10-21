@@ -20,8 +20,8 @@ socket.on("purchaseCart-confirm", (data) => {
 socket.on("purchaseCart-cancel", (data) => {
   Swal.fire({
     title: "Compra cancelada",
-    text: "No tenemos stock de los productos que desea",
-    icon: "cancel",
+    text: data,
+    icon: "warning",
   });
   //Agrego momentaneamente un reload. Luego recibiré la lista de productos por socket, al igual que en realtimeproducts
   //Hoy entiendo que no lo pide la consigna esto que hago.

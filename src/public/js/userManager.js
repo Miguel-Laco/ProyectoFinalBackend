@@ -1,4 +1,3 @@
-import config from "../../config/config.js";
 
 /* userManager.js */
 const socket = io();
@@ -15,10 +14,9 @@ socket.on("reloadManager", () => {
     window.location.reload();
 })
 
-
-async function deleteInactiveUsers() {
+async function deleteInactiveUsers(domain) {
     try {
-        const response = await fetch(`${config.DOMAIN}/api/users`, {
+        const response = await fetch(`${domain}/api/users`, {
         method: 'DELETE',
         });
 
@@ -40,5 +38,6 @@ async function deleteInactiveUsers() {
         console.error('Error en la solicitud DELETE:', error);
     }
 }
+
 
 

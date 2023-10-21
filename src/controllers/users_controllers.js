@@ -148,7 +148,8 @@ const crtl_userManager = async (req, res) => {
         cart: user.cart,
         last_connection: user.last_connection
         }));
-        res.render("userManager", { user, style: "userManager.css"  });
+        let domain = config.DOMAIN;
+        res.render("userManager", { user, domain, style: "userManager.css"  });
     } catch (error) {
         console.log(error);
     }

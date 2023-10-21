@@ -86,8 +86,9 @@ socketServer.on(`connection`, async (socket) => {
     logger.info("Nuevo Cliente Conectado");
     //Enviío la lista de productos al socket conectado
         let products = await manager.getProducts();
+        let domain = config.DOMAIN
         socket.emit("listaProductos",  {
-            products
+            products, domain
         })
 
     //Comienzo a escuchar el socket, para crear un producto
@@ -150,29 +151,52 @@ socketServer.on(`connection`, async (socket) => {
     })
 
     socket.on("purchaseCart", async (cid) => {
-            try {
+        try {
             const response = await fetch(`${config.DOMAIN}/api/carts/${cid}/purchase`, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json'
-            },
-            credentials: 'same-origin'
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'same-origin'
             });
+    
+            const data = await response.json();
             if (response.ok) {
                 // Si la respuesta es exitosa, analizar el JSON y emitir el evento de confirmación
-                const data = await response.json();
-                socket.emit("purchaseCart-confirm", data);
+                if (data.status === "success") {
+                    // Manejar el caso de éxito
+                    console.log("Compra exitosa, URL:", data.url);
+                    socket.emit("purchaseCart-confirm", data);
+                } else if (data.status === "error") {
+                    // Manejar el caso de error general
+                    console.error("Error en la compra:", data.message);
+                    socket.emit("purchaseCart-cancel", data.message);
+                    // Realiza la redirección o renderizado de la vista "cancel" en el cliente
+                } else if (data.status === "out_of_stock") {
+                    // Manejar el caso de falta de stock
+                    console.error("No hay stock de productos:", data.message);
+                    socket.emit("purchaseCart-cancel", data.message);
+                    // Realiza la redirección o renderizado de la vista "cancel" en el cliente
+                } else {
+                    // Manejar otros casos o errores inesperados
+                    console.error("Error inesperado:", data.message);
+                    socket.emit("purchaseCart-cancel", data.message);
+                    // Realiza la redirección o renderizado de la vista "cancel" en el cliente
+                }
             } else {
                 // Si la respuesta indica un error (por falta de stock), realiza la redirección o renderizado en el cliente
-                console.log('Error en la compra:', response.statusText);
-                socket.emit("purchaseCart-cancel");
+                console.error('Error en la compra:', response.statusText);
+                socket.emit("purchaseCart-cancel", data.message);
                 // Realiza la redirección o renderizado de la vista "cancel" en el cliente
             }
-            } catch (error) {
-                // Manejo de errores en caso de problemas de red u otros errores
-                console.error('Error:', error);
-            }
-    })
+        } catch (error) {
+            // Manejo de errores en caso de problemas de red u otros errores
+            console.error('Error:', error);
+            socket.emit("purchaseCart-cancel");
+            // Realiza la redirección o renderizado de la vista "cancel" en el cliente
+        }
+    });
+    
 
     socket.on("changeUserRole", async (email) => {
         try {
@@ -213,5 +237,6 @@ socketServer.on(`connection`, async (socket) => {
             logger.error(error);
         }
     })
+
 
 })
